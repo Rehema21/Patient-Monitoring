@@ -1,0 +1,71 @@
+---
+title: "BIMarkdown"
+output:
+  html_document: default
+  word_document: default
+date: "2023-11-11"
+---
+
+```{r Step 1}
+library(readr)
+DOHMH_HIV_AIDS_Annual_Report <- read_csv("data/DOHMH_HIV_AIDS_Annual_Report.csv")
+View(DOHMH_HIV_AIDS_Annual_Report)
+
+# Install renv:
+if (!is.element("renv", installed.packages()[, 1])) {
+  install.packages("renv", dependencies = TRUE)
+}
+require("renv")
+
+renv::init()
+
+
+renv::restore()
+
+
+if (!is.element("languageserver", installed.packages()[, 1])) {
+  install.packages("languageserver", dependencies = TRUE)
+}
+require("languageserver")
+
+
+
+```
+
+```{r Step 2}
+DOHMH_HIV_AIDS_Annual_Report <- read.csv("data/DOHMH_HIV_AIDS_Annual_Report.csv", header = FALSE,
+                         stringsAsFactors = TRUE)
+
+if (!is.element("readr", installed.packages()[, 1])) {
+  install.packages("readr", dependencies = TRUE)
+}
+
+## STEP 4. Load sample datasets that are provided as part of a package ----
+if (!is.element("mlbench", installed.packages()[, 1])) {
+  install.packages("mlbench", dependencies = TRUE)
+}
+require("mlbench")
+
+data("DOHMH_HIV_AIDS_Annual_Report")
+##Step 5
+
+dim(DOHMH_HIV_AIDS_Annual_Report)
+
+## Step 6
+sapply(DOHMH_HIV_AIDS_Annual_Report, class)
+```
+
+
+```{r}
+## Step 7 Measure of Central Tendancy
+DOHMH_HIV_AIDS_Annual_Report_freq <- DOHMH_HIV_AIDS_Annual_Report$Borough
+cbind(frequency = table(DOHMH_HIV_AIDS_Annual_Report_freq),
+      percentage = prop.table(table(DOHMH_HIV_AIDS_Annual_Report_freq)) * 100)
+
+```
+
+
+
+
+
+
